@@ -1,158 +1,54 @@
 document.addEventListener('DOMContentLoaded', () => {
-
-    // MANEJO DE MENÚ DE NAVEGACIÓN MÓVIL
+    // Menú Lateral Desplegable para Móviles
     const menuToggle = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('.nav-menu');
-    const navLinks = document.querySelectorAll('.nav-item');
+    const navLinks = document.querySelectorAll('.nav-link');
 
-    const toggleMenu = () => {
-        menuToggle.classList.toggle('active');
-        navMenu.classList.toggle('active');
-        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
-    };
-
-    menuToggle.addEventListener('click', toggleMenu);
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (navMenu.classList.contains('active')) {
-                toggleMenu();
-            }
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuToggle.classList.toggle('open');
         });
-    });
 
-    // SIMULACIÓN DE REPRODUCITOR DE AUDIO premium
-    const playBtn = document.getElementById('playBtn');
-    const progressBar = document.getElementById('progressBar');
-    const progressContainer = document.getElementById('progressContainer');
-    const timeDisplay = document.getElementById('timeDisplay');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuToggle.classList.remove('open');
+            });
+        });
+    }
 
-    let isPlaying = false;
-    let currentTime = 0;
-    const duration = 222; // 3 minutos y 42 segundos en total
-    let audioInterval = null;
-
-    const formatTime = (seconds) => {
-        const mins = Math.floor(seconds / 60);
-        const secs = Math.floor(seconds % 60);
-        return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-    };
-
-    const updatePlayerUI = () => {
-        const progressPercent = (currentTime / duration) * 100;
-        progressBar.style.width = `${progressPercent}%`;
-        timeDisplay.textContent = `${formatTime(currentTime)} / ${formatTime(duration)}`;
-    };
-
-    const playTrack = () => {
-        isPlaying = true;
-        playBtn.classList.add('playing');
-        audioInterval = setInterval(() => {
-            currentTime++;
-            if (currentTime >= duration) {
-                pauseTrack();
-                currentTime = 0;
-            }
-            updatePlayerUI();
-        }, 1000);
-    };
-
-    const pauseTrack = () => {
-        isPlaying = false;
-        playBtn.classList.remove('playing');
-        clearInterval(audioInterval);
-    };
-
-    playBtn.addEventListener('click', () => {
-        if (isPlaying) {
-            pauseTrack();
-        } else {
-            playTrack();
-        }
-    });
-
-    progressContainer.addEventListener('click', (e) => {
-        const rect = progressContainer.getBoundingClientRect();
-        const clickX = e.clientX - rect.left;
-        const width = rect.width;
-        const clickPercent = clickX / width;
-        currentTime = Math.floor(clickPercent * duration);
-        updatePlayerUI();
-    });
-
-    // LIGHTBOX NATIVO PARA LA GALERÍA
-    const lightbox = document.getElementById('lightbox');
-    const lightboxContent = document.getElementById('lightboxContent');
-    const lightboxClose = document.getElementById('lightboxClose');
+    // Funcionalidad interactiva básica de la galería
     const galleryItems = document.querySelectorAll('.gallery-item');
+    const lightbox = document.querySelector('.lightbox-viewer');
+    const lightboxContent = document.querySelector('.lightbox-content');
+    const lightboxClose = document.querySelector('.lightbox-close');
 
-    galleryItems.forEach(item => {
-        const openLightbox = () => {
-            const wrapper = item.querySelector('.gallery-img-wrapper');
-            const clone = wrapper.cloneNode(true);
-            lightboxContent.innerHTML = '';
-            lightboxContent.appendChild(clone);
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        };
-
-        item.addEventListener('click', openLightbox);
-        item.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') openLightbox();
+    if (galleryItems.length && lightbox && lightboxContent) {
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const title = item.querySelector('.gallery-card-title').innerText;
+                lightboxContent.innerHTML = `
+                    <div style="padding: 2.5rem; text-align: center; background: #0f1123; border: 1px solid #ff6a00; border-radius: 8px; max-width: 90%; width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+                        <h3 style="font-size: 1.8rem; margin-bottom: 1rem; color: #ff6a00; text-transform: uppercase; letter-spacing: 1px;">${title}</h3>
+                        <p style="color: #a0a0aa; font-size: 1rem; line-height: 1.5;">Concepto visual perteneciente al imaginario de Vochoa.</p>
+                    </div>
+                `;
+                lightbox.style.display = 'flex';
+                lightbox.setAttribute('aria-hidden', 'false');
+            });
         });
-    });
 
-    const closeLightboxView = () => {
-        lightbox.classList.remove('active');
-        if (!navMenu.classList.contains('active')) {
-            document.body.style.overflow = '';
-        }
-    };
+        lightboxClose.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+            lightbox.setAttribute('aria-hidden', 'true');
+        });
 
-    lightboxClose.addEventListener('click', closeLightboxView);
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) closeLightboxView();
-    });
-
-    window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-            closeLightboxView();
-        }
-    });
-
-    // VALIDACIÓN DE INTERCEPCIÓN DEL FORMULARIO DE CONTACTO
-    const contactForm = document.getElementById('contactForm');
-    const formStatus = document.getElementById('formStatus');
-
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const message = document.getElementById('message').value.trim();
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        formStatus.className = 'form-status';
-        formStatus.textContent = '';
-
-        if (!name || !email || !message) {
-            formStatus.classList.add('error');
-            formStatus.textContent = 'Por favor, llena todos los campos del formulario.';
-            return;
-        }
-
-        if (!emailRegex.test(email)) {
-            formStatus.classList.add('error');
-            formStatus.textContent = 'Ingresa una dirección de correo electrónico válida.';
-            return;
-        }
-
-        formStatus.classList.add('success');
-        formStatus.textContent = 'Enviando mensaje de forma segura...';
-
-        setTimeout(() => {
-            formStatus.textContent = '¡Mensaje enviado con éxito! Nos comunicaremos pronto.';
-            contactForm.reset();
-        }, 1500);
-    });
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+                lightbox.setAttribute('aria-hidden', 'true');
+            }
+        });
+    }
 });
