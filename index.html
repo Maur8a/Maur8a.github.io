@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vochoa | Sitio Oficial</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-container">
+            <a href="#hero" class="logo">VOCHOA</a>
+            <button class="menu-toggle" aria-label="Abrir menú">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#biografia">Historia</a></li>
+                    <li><a href="#reproductor">Música</a></li>
+                    <li><a href="#galeria">Galería</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">VOCHOA</h1>
+                <p class="hero-subtitle">El choque térmico del Rock Psicodélico, Indie y texturas LoFi</p>
+                <a href="#reproductor" class="btn btn-primary">Escuchar Ahora</a>
+            </div>
+            <div class="hero-fire-glow"></div>
+        </section>
+
+        <section id="biografia" class="bio-section">
+            <div class="container">
+                <div class="bio-grid">
+                    <div class="bio-text">
+                        <span class="section-subtitle">El Humano detrás del Arte</span>
+                        <h2 class="section-title">Esencia & Distorsión</h2>
+                        <p>Una fusión cruda y sentimental que navega entre la energía del Rock Indie, la nostalgia melancólica de las Power Ballads, texturas ambientales de los ritmos LoFi y pasajes etéreos de Rock Psicodélico.</p>
+                        <p>Cada pieza musical es un diario abierto, un cable a tierra que conecta historias profundamente humanas con atmósferas sonoras espaciales.</p>
+                    </div>
+                    <div class="bio-cards-container">
+                        <div class="story-card">
+                            <h3>El Lago De La Paz</h3>
+                            <p>Misticismo nocturno y melancolía bajo un cielo azul profundo. Una introspección sobre la calma que llega después de la tormenta interior.</p>
+                        </div>
+                        <div class="story-card">
+                            <h3>A Ralenti</h3>
+                            <p>Expresionismo puro y distorsión violeta. La transición obligada de la vida cuando los latidos exigen detener el tiempo a través del arte.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="reproductor" class="player-section">
+            <div class="container">
+                <h2 class="section-title text-center">Último Lanzamiento</h2>
+                
+                <div class="player-container">
+                    <div class="player-cover">
+                        <div class="cover-placeholder">
+                            <span class="cover-text">VOCHOA ALBUM</span>
+                        </div>
+                    </div>
+                    <div class="player-controls-side">
+                        <div class="track-info">
+                            <h3 id="current-title">El Lago De La Paz</h3>
+                            <p id="current-artist">Vochoa</p>
+                        </div>
+
+                        <div class="audio-player-ui">
+                            <div class="progress-area">
+                                <div class="progress-bar"><span></span></div>
+                                <div class="time-durations">
+                                    <span class="current-time">0:00</span>
+                                    <span class="total-duration">3:45</span>
+                                </div>
+                            </div>
+                            <div class="player-buttons">
+                                <button id="btn-shuffle" class="player-btn-secondary" type="button" aria-label="Aleatorio">🔀</button>
+                                <button id="btn-prev" class="player-btn-main" type="button" aria-label="Anterior">⏮</button>
+                                <button id="btn-play" class="player-btn-trigger" type="button" aria-label="Reproducir">▶</button>
+                                <button id="btn-next" class="player-btn-main" type="button" aria-label="Siguiente">⏭</button>
+                                <button id="btn-repeat" class="player-btn-secondary" type="button" aria-label="Repetir">🔁</button>
+                            </div>
+                        </div>
+
+                        <div class="streaming-links">
+                            <a href="#" class="stream-link" target="_blank" rel="noopener">Spotify</a>
+                            <a href="#" class="stream-link" target="_blank" rel="noopener">YouTube</a>
+                            <a href="#" class="stream-link" target="_blank" rel="noopener">Apple Music</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="galeria" class="gallery-section">
+            <div class="container">
+                <span class="section-subtitle text-center">Universo Visual</span>
+                <h2 class="section-title text-center">Arte de Sencillos</h2>
+                
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <div class="gallery-img-wrapper">
+                            <div class="img-fallback img-azul"><span>El Lago De La Paz</span></div>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-img-wrapper">
+                            <div class="img-fallback img-violeta"><span>A Ralenti</span></div>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-img-wrapper">
+                            <div class="img-fallback img-magenta"><span>Lluvia</span></div>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-img-wrapper">
+                            <div class="img-fallback img-fuego"><span>Vocho en Llamas</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="contact-section">
+            <div class="container-small">
+                <h2 class="section-title text-center">Contrataciones & Contacto</h2>
+                <p class="contact-description text-center">Para booking, prensa o colaboraciones, envía un mensaje directo a la cabecera del proyecto.</p>
+                
+                <form id="contact-form" class="minimal-form" novalidate>
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" id="name" name="name" required placeholder="Tu nombre">
+                        <span class="error-message">Este campo es obligatorio.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" required placeholder="tu@correo.com">
+                        <span class="error-message">Ingresa un correo electrónico válido.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensaje</label>
+                        <textarea id="message" name="message" rows="5" required placeholder="Cuéntame sobre tu propuesta o evento..."></textarea>
+                        <span class="error-message">Este campo es obligatorio.</span>
+                    </div>
+                    <div class="form-status" id="form-status"></div>
+                    <button type="submit" class="btn btn-submit">Enviar Mensaje</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container footer-content">
+            <p>&copy; 2026 Vochoa. Todos los derechos reservados.</p>
+            <div class="footer-socials">
+                <a href="#" target="_blank" rel="noopener">Instagram</a>
+                <a href="#" target="_blank" rel="noopener">YouTube</a>
+                <a href="#" target="_blank" rel="noopener">Facebook</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="lightbox" class="lightbox" role="dialog" aria-hidden="true">
+        <button class="lightbox-close" aria-label="Cerrar modal">&times;</button>
+        <div class="lightbox-content">
+            </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
