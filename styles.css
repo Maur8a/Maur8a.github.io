@@ -796,3 +796,22 @@ audio {
 .album-cover:hover{
     transform:scale(1.03);
 }
+.img-fallback{
+    position:relative;
+}
+
+.img-fallback::after{
+    content:"PRÓXIMAMENTE";
+    position:absolute;
+    bottom:25%;
+    left:50%;
+    transform:translateX(-50%);
+    opacity:0;
+    font-size:.75rem;
+    letter-spacing:3px;
+    transition:.3s;
+}
+
+.img-fallback:hover::after{
+    opacity:.8;
+}
