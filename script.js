@@ -20,50 +20,59 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 2. Simulación Interactiva del Reproductor de Música ---
-    const btnPlay = document.getElementById('btn-play');
-    const currentTitle = document.getElementById('current-title');
-    const progressSpan = document.querySelector('.progress-bar span');
-    const currentTimeEl = document.querySelector('.current-time');
-    
-    let isPlaying = false;
-    let progressInterval;
-    let currentSeconds = 0;
-    const totalSeconds = 225; // 3:45 en segundos
+    // --- 2. Reproductor de Audio Real ---
 
-    function formatTime(seconds) {
-        const mins = Math.floor(seconds / 60);
-        const secs = Math.floor(seconds % 60);
-        return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-    }
+const btnPlay = document.getElementById('btn-play');
+const audioPlayer = document.getElementById('audio-player');
+const progressSpan = document.querySelector('.progress-bar span');
+const currentTimeEl = document.querySelector('.current-time');
+const totalDurationEl = document.querySelector('.total-duration');
 
-    if (btnPlay) {
-        btnPlay.addEventListener('click', () => {
-            isPlaying = !isPlaying;
-            if (isPlaying) {
-                btnPlay.textContent = '⏸';
-                // Simulación de avance de barra de progreso
-                progressInterval = setInterval(() => {
-                    if (currentSeconds < totalSeconds) {
-                        currentSeconds++;
-                        const percentage = (currentSeconds / totalSeconds) * 100;
-                        progressSpan.style.width = `${percentage}%`;
-                        currentTimeEl.textContent = formatTime(currentSeconds);
-                    } else {
-                        clearInterval(progressInterval);
-                        isPlaying = false;
-                        btnPlay.textContent = '▶';
-                        currentSeconds = 0;
-                        progressSpan.style.width = '0%';
-                        currentTimeEl.textContent = '0:00';
-                    }
-                }, 1000);
-            } else {
-                btnPlay.textContent = '▶';
-                clearInterval(progressInterval);
-            }
-        });
-    }
+function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+}
+
+if (audioPlayer && btnPlay) {
+
+    audioPlayer.addEventListener('loadedmetadata', () => {
+        totalDurationEl.textContent =
+            formatTime(audioPlayer.duration);
+    });
+
+    btnPlay.addEventListener('click', () => {
+
+        if (audioPlayer.paused) {
+            audioPlayer.play();
+            btnPlay.textContent = '⏸';
+        } else {
+            audioPlayer.pause();
+            btnPlay.textContent = '▶';
+        }
+
+    });
+
+    audioPlayer.addEventListener('timeupdate', () => {
+
+        const progress =
+            (audioPlayer.currentTime / audioPlayer.duration) * 100;
+
+        progressSpan.style.width = progress + '%';
+
+        currentTimeEl.textContent =
+            formatTime(audioPlayer.currentTime);
+    });
+
+    audioPlayer.addEventListener('ended', () => {
+
+        btnPlay.textContent = '▶';
+
+        progressSpan.style.width = '0%';
+
+        currentTimeEl.textContent = '0:00';
+    });
+}
 
     // --- 3. Lightbox de Galería Nativo ---
     const galleryItems = document.querySelectorAll('.gallery-item');
