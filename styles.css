@@ -785,3 +785,14 @@ audio {
         gap: 1rem;
     }
 }
+.album-cover{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:all .4s ease;
+}
+
+.album-cover:hover{
+    transform:scale(1.03);
+}
