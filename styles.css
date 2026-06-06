@@ -796,3 +796,9 @@ audio {
 .album-cover:hover{
     transform:scale(1.03);
 }
+.gallery-cover{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
